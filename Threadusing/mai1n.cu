@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<ctime>
 #include<iostream>
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"s
 
 using namespace std;
 
@@ -10,7 +12,7 @@ __global__ void AddInts(int* a, int* b, int count) {
 	int id = blockIdx.x * blockDim.x + threadIdx.x;
 
 	if (id < count) {
-		a[id] = b[id]
+		a[id] = b[id]; 
 	}
 
 }
@@ -64,7 +66,7 @@ int main()
 		return 0;
 	}
 
-	AddInts << <count / 256 + 1, 256 >> > (d_a, d_b, count);
+	AddInts <<< count / 256 + 1, 256 >> > (d_a, d_b, count);
 
 	if (cudaMemcpy(h_a, d_a, sizeof(int) * count, cudaMemcpyDeviceToHost) != cudaSuccess) {
 
