@@ -17,4 +17,9 @@
   <ItemGroup>
     <None Include="So.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="onlyhelllo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
