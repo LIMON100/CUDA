@@ -3,7 +3,7 @@
 
 __global__ void arrAdd(int *md , int *nd , int *pd , int size){
 
-  int myid = threadIdx.x;
+  int myid = blockIdx.x * blockDim.x + threadIdx.x;
   pd[myid] = md[myid] + nd[myid];
 
 }
@@ -31,7 +31,7 @@ int main() {
 
   cudaMalloc(&pd , size);
 
-  dim3 DimGrid(1 , 1);
+  dim3 DimGrid(10 , 1);
   dim3 DimBlock(200 , 1);
 
   arrAdd<<< DimGrid , DimBlock >>>(md , nd , pd , size);
